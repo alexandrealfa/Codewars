@@ -6,9 +6,14 @@
 #
 # Examples:
 #
-# "(123) 456-7890"  => true
-# "(1111)555 2345"  => false
-# "(098) 123 4567"  => false
+# "(123) 456-7890" => true
+# "(1111)555 2345" => false
+# "(098) 123 4567" => false
 
 def valid_phone_number(phone_number):
-    return phone_number == '({}{}{}) {}{}{}-{}{}{}{}'.format(*[n for n in phone_number if n.isdigit()])
+    digits = [n for n in phone_number if n.isdigit()]
+    return phone_number == '({}{}{}) {}{}{}-{}{}{}{}'.format(*digits) if len(digits) == 10 else False
+
+def valid_phone_number_with_regesx(phoneNumber):
+    import re
+    return bool(re.match(r"^(\([0-9]+\))? [0-9]+-[0-9]+$", phoneNumber))
